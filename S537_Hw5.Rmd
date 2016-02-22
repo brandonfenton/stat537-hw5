@@ -40,6 +40,10 @@ pander(pcs$rotation %*% diag(pcs$sdev^2) %*% t(pcs$rotation),
 3. _Now consider the approximation to the correlation that occurs when you use 1 or the first two PCs. Discuss what aspects of the correlation matrix you miss. For this comparison, you can just print out the correlation matrices or you can take a difference._
 
 ```{r p3_a, echo=F, comment=NA, fig.pos="H", fig.align="center", cache=T}
+pander(pcs$rotation[,1:2] %*% diag(pcs$sdev[1:2]^2) %*% t(pcs$rotation[,1:2]),
+       caption="Reconstructed correlation matrix using only the first two PCS")
+pander(cor(cc2015Rs_2) - pcs$rotation[,1:2] %*% diag(pcs$sdev[1:2]^2) %*% t(pcs$rotation[,1:2]),
+       caption="Difference between original correlation matrix and reconstruction from two PCS")
 ```
 
 
