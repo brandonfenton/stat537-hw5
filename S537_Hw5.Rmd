@@ -46,6 +46,12 @@ pander(pcs$rotation %*% diag(pcs$sdev^2) %*% t(pcs$rotation),
 4. _Many researchers, especially in social sciences, work with the eigenvectors scaled by the square root of the eigenvalues. This is also often used in making biplots. For example, in the psych package, the principal function reports these ``standardized'' loadings instead of the raw eigenvectors. Read the help on the principal function and run the PCA using principal and show how you can get from your prcomp results to those provided by principal._
 
 ```{r p4_a, echo=F, comment=NA, fig.pos="H", fig.align="center", cache=T}
+require(psych)
+principalcs <- principal(cc2015Rs_2, scale=T, center=T)
+
+scaled.pcs <- cbind(principalcs$loadings, pcs$sdev[1]* pcs$rotation[,1])
+colnames(scaled.pcs) <- c("__principal()__", "__prcomp()__")
+pander(scaled.pcs, caption="Scaled first principal components from __principal()__ and __prcomp__")
 ```
 
 
