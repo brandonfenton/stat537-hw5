@@ -1,0 +1,73 @@
+---
+title: 'Stat 537: Homework 5'
+author: "Brandon Fenton and Kenny Flagg"
+date: "Due Friday, Feb 26 at end of day"
+output: pdf_document
+header-includes: \usepackage{float}
+---
+
+_For the first 7-variable PCA from HW 4 based on the ranked variables:_
+
+
+1. _Show that the loading vectors are orthogonal._
+
+```{r p1_a, echo=F, comment=NA, fig.pos="H", fig.align="center", cache=T}
+```
+
+
+2. _Use all the eigenvectors and eigenvalues to show that you can re-construct the entire correlation matrix._
+
+```{r p2_a, echo=F, comment=NA, fig.pos="H", fig.align="center", cache=T}
+```
+
+
+3. _Now consider the approximation to the correlation that occurs when you use 1 or the first two PCs. Discuss what aspects of the correlation matrix you miss. For this comparison, you can just print out the correlation matrices or you can take a difference._
+
+```{r p3_a, echo=F, comment=NA, fig.pos="H", fig.align="center", cache=T}
+```
+
+
+4. _Many researchers, especially in social sciences, work with the eigenvectors scaled by the square root of the eigenvalues. This is also often used in making biplots. For example, in the psych package, the principal function reports these ``standardized'' loadings instead of the raw eigenvectors. Read the help on the principal function and run the PCA using principal and show how you can get from your prcomp results to those provided by principal._
+
+```{r p4_a, echo=F, comment=NA, fig.pos="H", fig.align="center", cache=T}
+```
+
+
+5. _What are the advantages in terms of interpretation and potential calculations from this re-scaling?_
+
+```{r p4_a, echo=F, comment=NA, fig.pos="H", fig.align="center", cache=T}
+```
+
+
+## R Code Appendix:
+Problem 1:
+```{r a1, ref.label='p1_a', eval=F}
+```
+
+Problem 2:
+```{r a2, ref.label='p2_a', eval=F}
+```
+
+Problem 3:
+```{r a3, ref.label='p3_a', eval=F}
+```
+
+Problem 4:
+```{r a4, ref.label='p4_a', eval=F}
+```
+
+Problem 5:
+```{r a5, ref.label='p5_a', eval=F}
+```
+
+
+### About This Markdown File
+
+  * File creation date: `r Sys.Date()`
+  * `r R.version.string`
+  * R version (short form): `r getRversion()`
+  * Additional session information
+  
+```{r echo=FALSE}
+sessionInfo()  # could use devtools::session_info() if you prefer that
+```
