@@ -30,6 +30,8 @@ pander(zapsmall(crossprod(pcs$rotation)))
 2. _Use all the eigenvectors and eigenvalues to show that you can re-construct the entire correlation matrix._
 
 ```{r p2_a, echo=F, comment=NA, fig.pos="H", fig.align="center", cache=T}
+pander(cor(cc2015Rs_2))
+pander(t(pcs$rotation) %*% diag(pcs$sdev^2) %*% pcs$rotation)
 ```
 
 
