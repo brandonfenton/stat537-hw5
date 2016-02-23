@@ -26,7 +26,7 @@ cc2015Rs_2<-cc2015Rs[,c("HUM_RSD","OTHER_RSD","SOCSC_RSD","STEM_RSD","PDNFRSTAFF
 pcs <- prcomp(cc2015Rs_2, scale=T, center=T)
 
 library(pander)
-pander(zapsmall(crossprod(pcs$rotation)), caption="Crossproduct of the rotation matrix")
+pander(zapsmall(crossprod(pcs$rotation)), caption="Crossproduct of the rotation matrix.")
 ```
 
 
@@ -37,7 +37,7 @@ $$\mathbf{R}=\mathbf{A}\mathbf{\Lambda}\mathbf{A}'.$$
 Table 2 shows $\mathbf{R}$, and $\mathbf{A}\mathbf{\Lambda}\mathbf{A}'$ appears in Table 3. They are indeed identical.
 
 ```{r p2_a, echo=F, comment=NA, fig.pos="H", fig.align="center", cache=T, size="footnotesize"}
-pander(cor(cc2015Rs_2), caption="Correlation matrix of original data", split.table = Inf)
+pander(cor(cc2015Rs_2), caption="Correlation matrix of original data.", split.table = Inf)
 pander(pcs$rotation %*% diag(pcs$sdev^2) %*% t(pcs$rotation),
        caption="Reconstructed correlation matrix", split.table = Inf)
 ```
@@ -47,14 +47,16 @@ pander(pcs$rotation %*% diag(pcs$sdev^2) %*% t(pcs$rotation),
 
 The correlation matrix is approximately reconstructed by defining
 $$\mathbf{A}_2=\begin{pmatrix}\mathbf{a}_1&\mathbf{a}_2\end{pmatrix}
-\text{ and }\mathbf{\Lambda}_2=\begin{pmatrix}\lambda_1&0\\0&\lambda_2\end{pmatrix},$$ and computing $\mathbf{A}_2\mathbf{\Lambda}_2\mathbf{A}_2'$ (shown in Table 4).
+\text{ and }\mathbf{\Lambda}_2=\begin{pmatrix}\lambda_1&0\\0&\lambda_2\end{pmatrix},$$ and computing $\mathbf{A}_2\mathbf{\Lambda}_2\mathbf{A}_2'$ (shown in Table 4). The most obvious difference between this reconstruction and the true correlation matrix is that the diagaonal values of the reconstruction are less than 1. This happens because not all of the variation in the individual variables occurs in these two dimensions.
+
+Table 5 shows the difference, $\mathbf{R}-\mathbf{A}_2\mathbf{\Lambda}_2\mathbf{A}_2'$. Most of the off-diagonal entries are negative, implying that the variables are more strongly correlated when projected into the principal component space.
 
 ```{r p3_a, echo=F, comment=NA, fig.pos="H", fig.align="center", cache=T, size="footnotesize"}
 pander(pcs$rotation[,1:2] %*% diag(pcs$sdev[1:2]^2) %*% t(pcs$rotation[,1:2]),
-       caption="Reconstructed correlation matrix using only the first two PCS",
+       caption="Reconstructed correlation matrix using only the first two PCS.",
        split.table = Inf)
 pander(cor(cc2015Rs_2) - pcs$rotation[,1:2] %*% diag(pcs$sdev[1:2]^2) %*% t(pcs$rotation[,1:2]),
-       caption="Difference between original correlation matrix and reconstruction from two PCS",
+       caption="Difference between original correlation matrix and reconstruction from the first two PCS.",
        split.table = Inf)
 ```
 
