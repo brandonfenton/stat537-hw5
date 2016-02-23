@@ -55,8 +55,6 @@ Table 5 shows the difference, $\mathbf{R}-\mathbf{A}_2\mathbf{\Lambda}_2\mathbf{
 pander(pcs$rotation[,1:2] %*% diag(pcs$sdev[1:2]^2) %*% t(pcs$rotation[,1:2]),
        caption="Reconstructed correlation matrix using only the first two PCS.",
        split.table = Inf)
-```
-```{r p3_b, echo=F, comment=NA, fig.pos="H", fig.align="center", cache=T, size="footnotesize"}
 pander(cor(cc2015Rs_2) - pcs$rotation[,1:2] %*% diag(pcs$sdev[1:2]^2) %*% t(pcs$rotation[,1:2]),
        caption="Difference between original correlation matrix and reconstruction from the first two PCS.",
        split.table = Inf)
@@ -92,8 +90,6 @@ Problem 2:
 
 Problem 3:
 ```{r a3, ref.label='p3_a', eval=F}
-```
-```{r b3, ref.label='p3_b', eval=F}
 ```
 
 Problem 4:
