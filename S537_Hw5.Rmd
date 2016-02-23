@@ -63,15 +63,22 @@ pander(cor(cc2015Rs_2) - pcs$rotation[,1:2] %*% diag(pcs$sdev[1:2]^2) %*% t(pcs$
 
 ```{r p4_a, echo=F, comment=NA, fig.pos="H", fig.align="center", cache=T}
 require(psych)
-principalcs <- principal(cc2015Rs_2, scale=T, center=T)
+principalcs <- principal(cc2015Rs_2, nfactors=7, rotate="none")
 
-scaled.pcs <- cbind(principalcs$loadings, pcs$sdev[1]* pcs$rotation[,1])
-colnames(scaled.pcs) <- c("__principal()__", "__prcomp()__")
-pander(scaled.pcs, caption="Scaled first principal components from __principal()__ and __prcomp__")
+# scaled.pcs <- cbind(principalcs$loadings, pcs$sdev[1]* pcs$rotation[,1])
+# colnames(scaled.pcs) <- c("__principal()__", "__prcomp()__")
+# pander(scaled.pcs, caption="Scaled first principal components from __principal()__ and __prcomp__")
+pander(t(pcs$sdev * t(pcs$rotation)), caption = "Re-scaled principal components from __prcomp()__")
+pander(principalcs$loadings[,1:7], caption = "Re-scaled principal components from __principal()__")
+
+
 ```
-
+TODO
+There is a sign difference for PC3 loadings between the two and I don't know why.
 
 5. _What are the advantages in terms of interpretation and potential calculations from this re-scaling?_
+
+Re-scaled PC loadings have also included information about the proportion of variance explained by each PC.  This information is immediately useful in many situations.  For example, 
 
 ```{r p4_a, echo=F, comment=NA, fig.pos="H", fig.align="center", cache=T}
 ```
