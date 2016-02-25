@@ -70,11 +70,9 @@ principalcs <- principal(cc2015Rs_2, nfactors=7, rotate="none")
 # pander(scaled.pcs, caption="Scaled first principal components from __principal()__ and __prcomp__")
 pander(t(pcs$sdev * t(pcs$rotation)), caption = "Re-scaled principal components from __prcomp()__")
 pander(principalcs$loadings[,1:7], caption = "Re-scaled principal components from __principal()__")
-
-
 ```
-TODO
-There is a sign difference for PC3 loadings between the two and I don't know why.
+Table 6 shows the result of the calculation __t(pcs$sdev * t(pcs$rotation)__  using the results from __prcomp()__, while Table 7 shows the results from __principal()__.  Note that there is a sign difference in the loadings for PC3 between the two methods, but since the vectors are scalar multiples of each other they will fall along the same axis.  This is an artifact of the algorithm used to determine the eigenvectors, and will not affect any interpretation aside from changing the direction.
+
 
 5. _What are the advantages in terms of interpretation and potential calculations from this re-scaling?_
 
