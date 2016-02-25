@@ -78,9 +78,8 @@ Table 6 shows the result of the calculation __t(pcs$sdev * t(pcs$rotation)__  us
 
 Re-scaled PC loadings have also included information about the proportion of variance explained by each PC.  This information is useful in many situations.  For example, biplots show the variables and observations plotted on the pricipal component axes.  Scaling the vectors before plotting allows a variable's placement on the plot to immediately convey its overall importance in the dataset in addition to the strength of its association with the principal component.
 
-```{r p4_a, echo=F, comment=NA, fig.pos="H", fig.align="center", cache=T}
-```
 
+\pagebreak
 
 ## R Code Appendix:
 Problem 1:
@@ -99,12 +98,8 @@ Problem 4:
 ```{r a4, ref.label='p4_a', eval=F}
 ```
 
-Problem 5:
-```{r a5, ref.label='p5_a', eval=F}
-```
 
-
-### About This Markdown File
+<!--- ### About This Markdown File
 
   * File creation date: `r Sys.Date()`
   * `r R.version.string`
@@ -114,3 +109,4 @@ Problem 5:
 ```{r echo=FALSE}
 sessionInfo()  # could use devtools::session_info() if you prefer that
 ```
+-->
