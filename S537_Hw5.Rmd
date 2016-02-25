@@ -78,7 +78,7 @@ There is a sign difference for PC3 loadings between the two and I don't know why
 
 5. _What are the advantages in terms of interpretation and potential calculations from this re-scaling?_
 
-Re-scaled PC loadings have also included information about the proportion of variance explained by each PC.  This information is immediately useful in many situations.  For example, biplots blah blah blah
+Re-scaled PC loadings have also included information about the proportion of variance explained by each PC.  This information is useful in many situations.  For example, biplots show the variables and observations plotted on the pricipal component axes.  Scaling the vectors before plotting allows a variable's placement on the plot to immediately convey its overall importance in the dataset in addition to the strength of its association with the principal component.
 
 ```{r p4_a, echo=F, comment=NA, fig.pos="H", fig.align="center", cache=T}
 ```
