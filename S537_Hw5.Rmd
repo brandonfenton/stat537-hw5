@@ -40,9 +40,13 @@ pander(zapsmall(crossprod(pcs$rotation)), caption="Crossproduct of the rotation 
     indeed identical.
 
 ```{r p2_a, echo=F, comment=NA, fig.pos="H", fig.align="center", cache=T, size="footnotesize"}
-pander(cor(cc2015Rs_2), caption="Correlation matrix of original data", split.table = Inf)
-pander(pcs$rotation %*% diag(pcs$sdev^2) %*% t(pcs$rotation),
-       caption="Reconstructed correlation matrix", split.table = Inf)
+cor.mat <- cor(cc2015Rs_2)
+colnames(cor.mat) <- c('H', 'O', 'SO', 'ST', 'PDNF', 'S', 'NS')
+pander(cor.mat, caption="Correlation matrix of original data", split.table = Inf)
+
+cor.reconstruct <- pcs$rotation %*% diag(pcs$sdev^2) %*% t(pcs$rotation)
+colnames(cor.reconstruct) <- c('H', 'O', 'SO', 'ST', 'PDNF', 'S', 'NS')
+pander(cor.reconstruct, caption="Reconstructed correlation matrix", split.table = Inf)
 ```
 
 
@@ -53,10 +57,13 @@ pander(pcs$rotation %*% diag(pcs$sdev^2) %*% t(pcs$rotation),
     \text{ and }\mathbf{\Lambda}_2=\begin{pmatrix}\lambda_1&0\\0&\lambda_2\end{pmatrix},$$ and computing     $\mathbf{A}_2\mathbf{\Lambda}_2\mathbf{A}_2'$ (shown in Table 4).
 
 ```{r p3_a, echo=F, comment=NA, fig.pos="H", fig.align="center", cache=T, size="footnotesize"}
-pander(pcs$rotation[,1:2] %*% diag(pcs$sdev[1:2]^2) %*% t(pcs$rotation[,1:2]),
+cor.first2 <- pcs$rotation[,1:2] %*% diag(pcs$sdev[1:2]^2) %*% t(pcs$rotation[,1:2])
+colnames(cor.first2) <- c('H', 'O', 'SO', 'ST', 'PDNF', 'S', 'NS')
+pander(cor.first2,
        caption="Reconstructed correlation matrix using only the first two PCS",
        split.table = Inf)
-pander(cor(cc2015Rs_2) - pcs$rotation[,1:2] %*% diag(pcs$sdev[1:2]^2) %*% t(pcs$rotation[,1:2]),
+
+pander(cor.mat - cor.first2,
        caption="Difference between original correlation matrix and reconstruction from two PCS",
        split.table = Inf)
 ```
