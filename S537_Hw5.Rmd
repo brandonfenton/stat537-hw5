@@ -9,11 +9,12 @@ header-includes: \usepackage{float}
 _For the first 7-variable PCA from HW 4 based on the ranked variables:_
 
 
-1. _Show that the loading vectors are orthogonal._
+1. _Show that the loading vectors are orthogonal._   
 
-In Everitt and Hothorn's notation, the eigenvectors are denoted as $\mathbf{a}_j$ and the rotation matrix is
-$$\mathbf{A}=\begin{pmatrix}\mathbf{a}_1&\cdots&\mathbf{a}_q\end{pmatrix}.$$
-Table 1 shows that $\mathbf{A}'\mathbf{A}=\mathbf{I}$, which implies that the $\mathbf{a}_j$ are orthogonal unit vectors.
+    In Everitt and Hothorn's notation, the eigenvectors are denoted as $\mathbf{a}_j$ and the rotation       matrix is
+    $$\mathbf{A}=\begin{pmatrix}\mathbf{a}_1&\cdots&\mathbf{a}_q\end{pmatrix}.$$
+    Table 1 shows that $\mathbf{A}'\mathbf{A}=\mathbf{I}$, which implies that the $\mathbf{a}_j$ are 
+    orthogonal unit vectors.
 
 ```{r p1_a, echo=F, comment=NA, fig.pos="H", fig.align="center", cache=T, size="footnotesize"}
 cc2015<-read.csv("https://montana.box.com/shared/static/0tp7ooud5sux4wzpkrjgklpudrreu6jc.csv",header=T,na.strings="dnr")
@@ -32,9 +33,11 @@ pander(zapsmall(crossprod(pcs$rotation)), caption="Crossproduct of the rotation 
 
 2. _Use all the eigenvectors and eigenvalues to show that you can re-construct the entire correlation matrix._
 
-Let $\mathbf{R}$ be the original correlation matrix and let $\mathbf{\Lambda}$ be the diagonal matrix of eigenvalues. $\mathbf{\Lambda}$ and $\mathbf{A}$ are found by diagonalizing $\mathbf{B}$, so
-$$\mathbf{R}=\mathbf{A}\mathbf{\Lambda}\mathbf{A}'.$$
-Table 2 shows $\mathbf{R}$, and $\mathbf{A}\mathbf{\Lambda}\mathbf{A}'$ appears in Table 3. They are indeed identical.
+    Let $\mathbf{R}$ be the original correlation matrix and let $\mathbf{\Lambda}$ be the diagonal matrix
+    of eigenvalues. $\mathbf{\Lambda}$ and $\mathbf{A}$ are found by diagonalizing $\mathbf{B}$, so
+    $$\mathbf{R}=\mathbf{A}\mathbf{\Lambda}\mathbf{A}'.$$
+    Table 2 shows $\mathbf{R}$, and $\mathbf{A}\mathbf{\Lambda}\mathbf{A}'$ appears in Table 3. They are
+    indeed identical.
 
 ```{r p2_a, echo=F, comment=NA, fig.pos="H", fig.align="center", cache=T, size="footnotesize"}
 pander(cor(cc2015Rs_2), caption="Correlation matrix of original data", split.table = Inf)
@@ -43,11 +46,11 @@ pander(pcs$rotation %*% diag(pcs$sdev^2) %*% t(pcs$rotation),
 ```
 
 
-3. _Now consider the approximation to the correlation that occurs when you use 1 or the first two PCs. Discuss what aspects of the correlation matrix you miss. For this comparison, you can just print out the correlation matrices or you can take a difference._
+3. _Now consider the approximation to the correlation that occurs when you use 1 or the first two PCs. Discuss what aspects of the correlation matrix you miss. For this comparison, you can just print out the correlation matrices or you can take a difference._      
 
-The correlation matrix is approximately reconstructed by defining
-$$\mathbf{A}_2=\begin{pmatrix}\mathbf{a}_1&\mathbf{a}_2\end{pmatrix}
-\text{ and }\mathbf{\Lambda}_2=\begin{pmatrix}\lambda_1&0\\0&\lambda_2\end{pmatrix},$$ and computing $\mathbf{A}_2\mathbf{\Lambda}_2\mathbf{A}_2'$ (shown in Table 4).
+    The correlation matrix is approximately reconstructed by defining
+    $$\mathbf{A}_2=\begin{pmatrix}\mathbf{a}_1&\mathbf{a}_2\end{pmatrix}
+    \text{ and }\mathbf{\Lambda}_2=\begin{pmatrix}\lambda_1&0\\0&\lambda_2\end{pmatrix},$$ and computing     $\mathbf{A}_2\mathbf{\Lambda}_2\mathbf{A}_2'$ (shown in Table 4).
 
 ```{r p3_a, echo=F, comment=NA, fig.pos="H", fig.align="center", cache=T, size="footnotesize"}
 pander(pcs$rotation[,1:2] %*% diag(pcs$sdev[1:2]^2) %*% t(pcs$rotation[,1:2]),
@@ -61,6 +64,13 @@ pander(cor(cc2015Rs_2) - pcs$rotation[,1:2] %*% diag(pcs$sdev[1:2]^2) %*% t(pcs$
 
 4. _Many researchers, especially in social sciences, work with the eigenvectors scaled by the square root of the eigenvalues. This is also often used in making biplots. For example, in the psych package, the principal function reports these ``standardized'' loadings instead of the raw eigenvectors. Read the help on the principal function and run the PCA using principal and show how you can get from your prcomp results to those provided by principal._
 
+    Table 6 shows the result of the calculation __t(pcs\$sdev * t(pcs\$rotation)__  using the results   
+    from __prcomp()__, while Table 7 shows the results from __principal()__.  Note that there is a sign 
+    difference in the loadings for PC3 between the two methods, but since the vectors are scalar        
+    multiples of each other they will fall along the same axis.  This is an artifact of the algorithm   
+    used to determine the eigenvectors, and will not affect any interpretation aside from changing the  
+    direction.
+
 ```{r p4_a, echo=F, comment=NA, fig.pos="H", fig.align="center", cache=T}
 require(psych)
 principalcs <- principal(cc2015Rs_2, nfactors=7, rotate="none")
@@ -71,12 +81,13 @@ principalcs <- principal(cc2015Rs_2, nfactors=7, rotate="none")
 pander(t(pcs$sdev * t(pcs$rotation)), caption = "Re-scaled principal components from __prcomp()__")
 pander(principalcs$loadings[,1:7], caption = "Re-scaled principal components from __principal()__")
 ```
-Table 6 shows the result of the calculation __t(pcs$sdev * t(pcs$rotation)__  using the results from __prcomp()__, while Table 7 shows the results from __principal()__.  Note that there is a sign difference in the loadings for PC3 between the two methods, but since the vectors are scalar multiples of each other they will fall along the same axis.  This is an artifact of the algorithm used to determine the eigenvectors, and will not affect any interpretation aside from changing the direction.
+
+
 
 
 5. _What are the advantages in terms of interpretation and potential calculations from this re-scaling?_
 
-Re-scaled PC loadings have also included information about the proportion of variance explained by each PC.  This information is useful in many situations.  For example, biplots show the variables and observations plotted on the pricipal component axes.  Scaling the vectors before plotting allows a variable's placement on the plot to immediately convey its overall importance in the dataset in addition to the strength of its association with the principal component.
+    Re-scaled PC loadings have also included information about the proportion of variance explained by       each PC.  This information is useful in many situations.  For example, biplots show the variables and     observations plotted on the pricipal component axes.  Scaling the vectors before plotting allows a       variable's placement on the plot to immediately convey its overall importance in the dataset in          addition to the strength of its association with the principal component.
 
 
 \pagebreak
