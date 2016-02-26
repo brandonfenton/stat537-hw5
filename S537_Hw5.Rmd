@@ -43,7 +43,10 @@ pander(zapsmall(crossprod(pcs$rotation)), caption="Crossproduct of the rotation 
 cor.mat <- cor(cc2015Rs_2)
 colnames(cor.mat) <- c('H', 'O', 'SO', 'ST', 'PDNF', 'S', 'NS')
 pander(cor.mat, caption="Correlation matrix of original data", split.table = Inf)
+```
 
+\pagebreak
+```{r p2_b, echo=F, comment=NA, fig.pos="H", fig.align="center", cache=T, size="footnotesize"}
 cor.reconstruct <- pcs$rotation %*% diag(pcs$sdev^2) %*% t(pcs$rotation)
 colnames(cor.reconstruct) <- c('H', 'O', 'SO', 'ST', 'PDNF', 'S', 'NS')
 pander(cor.reconstruct, caption="Reconstructed correlation matrix", split.table = Inf)
@@ -106,6 +109,8 @@ Problem 1:
 
 Problem 2:
 ```{r a2, ref.label='p2_a', eval=F}
+```
+```{r b2, ref.label='p2_a', eval=F}
 ```
 
 Problem 3:
